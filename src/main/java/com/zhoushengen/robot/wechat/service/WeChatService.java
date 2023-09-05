@@ -52,6 +52,9 @@ public interface WeChatService {
         if (null == res) {
             int random_index = (int) (Math.random() * timeOutMessages.length);
             text = timeOutMessages[random_index];
+        } else if (null != res.get("error")){
+            JSONObject error = res.getObject("error", JSONObject.class);
+            text = error.getObject("message", String.class);
         } else {
             text = OpenAIRemoteApi.formatResContext(res);
         }

@@ -1,3 +1,6 @@
+server:
+  port: 10001
+
 wechat:
   register: wxid_bunp0hfj6n1p22
   registerName: 明哥的小跟班
@@ -5,7 +8,7 @@ wechat:
   gaoChangWxid: wxid_z247kp2sykwb12
 
 openAI:
-  auth-token: Bearer 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
+  auth-token: Bearer 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
   ## 访问超时时间 单位：秒
   request-timeout: 30
 
