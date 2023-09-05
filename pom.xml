@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.12.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.zhoushengen</groupId>
+	<artifactId>wechat-robot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>robot</name>
+	<description>robot project for Spring Boot</description>
+	<properties>
+		<java.version>8</java.version>
+		<knife4j.version>3.0.3</knife4j.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<okhttp3.version>4.8.1</okhttp3.version>
+		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+		<hutool.version>5.3.1</hutool.version>
+		<pagehelper.version>5.2.1</pagehelper.version>
+		<pagehelper.starter.version>1.3.1</pagehelper.starter.version>
+		<mybatis-plus.version>3.3.2</mybatis-plus.version>
+		<fastjson.version>1.2.31</fastjson.version>
+		<commons.io.version>2.11.0</commons.io.version>
+		<druid.version>1.1.10</druid.version>
+		<joda-time.version>2.9.5</joda-time.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<mapper.version>4.1.5</mapper.version>
+		<mapper.starter.version>2.1.5</mapper.starter.version>
+		<retrofit.version>2.3.13</retrofit.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<!--在引用时请在maven中央仓库搜索3.X最新版本号-->
+			<version>${knife4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.lianjiatech</groupId>
+			<artifactId>retrofit-spring-boot-starter</artifactId>
+			<version>${retrofit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<!--        <dependency>-->
+		<!--            <groupId>mysql</groupId>-->
+		<!--            <artifactId>mysql-connector-java</artifactId>-->
+		<!--            <version>${mysql-connector-java.version}</version>-->
+		<!--        </dependency>-->
+		<!--        <dependency>-->
+		<!--            <groupId>com.baomidou</groupId>-->
+		<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+		<!--            <version>${mybatis-plus.version}</version>-->
+		<!--        </dependency>-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<!--        <dependency>-->
+		<!--            <groupId>com.alibaba</groupId>-->
+		<!--            <artifactId>druid</artifactId>-->
+		<!--            <version>${druid.version}</version>-->
+		<!--        </dependency>-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+		<!-- orika -->
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<!-- 引入Druid依赖，阿里巴巴所提供的数据源 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.29</version>
+		</dependency>
+
+		<!-- 提供mysql驱动 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
+
+
+		<!--        <dependency>-->
+		<!--            <groupId>tk.mybatis</groupId>-->
+		<!--            <artifactId>mapper</artifactId>-->
+		<!--            <version>${mapper.version}</version>-->
+		<!--        </dependency>-->
+		<!--        <dependency>-->
+		<!--            <groupId>tk.mybatis</groupId>-->
+		<!--            <artifactId>mapper-spring-boot-starter</artifactId>-->
+		<!--            <version>${mapper.starter.version}</version>-->
+		<!--        </dependency>-->
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

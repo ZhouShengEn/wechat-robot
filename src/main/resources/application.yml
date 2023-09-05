@@ -1,0 +1,56 @@
+wechat:
+  register: wxid_bunp0hfj6n1p22
+  registerName: 明哥的小跟班
+  ourChatId: 19456686024@chatroom
+  gaoChangWxid: wxid_z247kp2sykwb12
+
+openAI:
+  auth-token: Bearer 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
+  ## 访问超时时间 单位：秒
+  request-timeout: 30
+
+proxy:
+  confirm: true
+  host: 127.0.0.1
+  port: 10809
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+  datasource:
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.26.44.124:3306/wechat?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: mypassword
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  quartz:
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: scheduler #实例名
+            instanceId: AUTO #实例编号自动生成
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool #连接池实现类
+            threadCount: 10 #线程数量
+            threadPriority: 5 #线程优先级
+            threadsInheritContextClassLoaderOfInitializingThread: true #配置是否启动自动加载数据库内的定时任务，默认true
