@@ -29,13 +29,13 @@ public class SendMorningJob extends QuartzJobBean {
     @Value("${wechat.ourChatId}")
     private String ourChatId;
 
-    @Value("${wechat.gaoChangWxid}")
-    private String gaoChangWxid;
+    @Value("${wechat.girlFriendWxid}")
+    private String girlFriendWxid;
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) {
         HashMap<String, String> map = new HashMap<>();
-        map.put(gaoChangWxid, " 早安我的大宝贝![玫瑰]");
+        map.put(girlFriendWxid, " 早安我的大宝贝![玫瑰]");
         weChatRemoteApi.sendTextMsg(registerWxid, new SendTextMsgReqDTO(ourChatId, weChatRemoteApi.assembleRoomSendText(registerWxid, map)));
     }
 }

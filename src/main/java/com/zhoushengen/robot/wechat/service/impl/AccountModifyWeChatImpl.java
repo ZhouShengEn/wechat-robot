@@ -26,16 +26,20 @@ public class AccountModifyWeChatImpl implements WeChatService {
     @Value("${wechat.register}")
     private String registerWxid;
 
+    @Value("${wechat.function.loginConfirm}")
+    private Boolean loginConfirm;
+
     @Override
     public void handleMsg(WeChatMsgVO msg) {
-        String type = msg.getData().getType();
-        if ("1".equals(type)) {
-            BaseWeChatResDTO<List<QueryRoomsResDTO>> roomRes = weChatRemoteApi.queryRooms(registerWxid);
-            roomRes.getResult().forEach(room -> {
-                String context = "天空一声巨响，明总的小跟班强势上线，机器人服务已开启！[转圈]";
-                weChatRemoteApi.sendTextMsg(registerWxid, new SendTextMsgReqDTO(room.getWxid(), context));
-            });
+        if (loginConfirm) {
+            String type = msg.getData().getType();
+            if ("1".equals(type)) {
+                BaseWeChatResDTO<List<QueryRoomsResDTO>> roomRes = weChatRemoteApi.queryRooms(registerWxid);
+                roomRes.getResult().forEach(room -> {
+                    String context = "天空一声巨响，明总的小跟班强势上线，机器人服务已开启！[转圈]";
+                    weChatRemoteApi.sendTextMsg(registerWxid, new SendTextMsgReqDTO(room.getWxid(), context));
+                });
+            }
         }
-
     }
 }

@@ -31,6 +31,7 @@
 		<mapper.version>4.1.5</mapper.version>
 		<mapper.starter.version>2.1.5</mapper.starter.version>
 		<retrofit.version>2.3.13</retrofit.version>
+		<redisson.version>3.17.4</redisson.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,8 +75,27 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>${redisson.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.milvus</groupId>
+			<artifactId>milvus-sdk-java</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.jodah</groupId>
+			<artifactId>expiringmap</artifactId>
+			<version>0.5.8</version>
 		</dependency>
 		<!--        <dependency>-->
 		<!--            <groupId>mysql</groupId>-->

@@ -1,16 +1,7 @@
 package com.zhoushengen.robot.wechat.service;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.zhoushengen.robot.util.SpringContextUtils;
-import com.zhoushengen.robot.wechat.dto.SendTextMsgReqDTO;
-import com.zhoushengen.robot.wechat.remote.OpenAIRemoteApi;
-import com.zhoushengen.robot.wechat.remote.WeChatRemoteApi;
 import com.zhoushengen.robot.wechat.vo.WeChatMsgVO;
-
-import java.util.Date;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @Author: zhoushengen
@@ -25,39 +16,4 @@ public interface WeChatService {
 
     void handleMsg(WeChatMsgVO msg);
 
-
-    default String handleOpenAIRequest(String registerWxid, SendTextMsgReqDTO timeoutResMsg, String requestMsg,
-        WeChatRemoteApi weChatRemoteApi) {
-        AtomicBoolean flag = new AtomicBoolean(Boolean.TRUE);
-        Date start = new Date();
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-            while (flag.get()) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (new Date().getTime() - start.getTime() >= 17000) {
-                    weChatRemoteApi.sendTextMsg(registerWxid, timeoutResMsg);
-                    flag.set(Boolean.FALSE);
-                }
-            }
-        });
-        OpenAIRemoteApi openAIRemoteApi = SpringContextUtils.getBean(OpenAIRemoteApi.class);
-        JSONObject res = openAIRemoteApi.requestOpenAi(requestMsg);
-        flag.set(Boolean.FALSE);
-        future.cancel(Boolean.TRUE);
-        //            Response<JSONObject> chatRes = openAIRemoteApi.chat(chatReq);
-        String text = null;
-        if (null == res) {
-            int random_index = (int) (Math.random() * timeOutMessages.length);
-            text = timeOutMessages[random_index];
-        } else if (null != res.get("error")){
-            JSONObject error = res.getObject("error", JSONObject.class);
-            text = error.getObject("message", String.class);
-        } else {
-            text = OpenAIRemoteApi.formatResContext(res);
-        }
-        return text;
-    }
 }

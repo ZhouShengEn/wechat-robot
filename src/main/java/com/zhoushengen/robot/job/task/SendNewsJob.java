@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,9 +38,6 @@ public class SendNewsJob extends QuartzJobBean {
 
     private final String[] TITLE_NUM = new String[]{"①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧"};
 
-    public static HashSet<String> chatRooms = new HashSet(){{
-    }};
-
     @Autowired
     private PushMessageMapper pushMessageMapper;
 
@@ -53,6 +49,18 @@ public class SendNewsJob extends QuartzJobBean {
 
     @Autowired
     private JuHeWeatherRemoteApi juHeWeatherRemoteApi;
+
+    @Value("${ak.juHe.fapig}")
+    private String fapigKey;
+
+    @Value("${ak.juHe.todayOnhistory}")
+    private String todayOnhistoryKey;
+
+    @Value("${ak.juHe.calendar}")
+    private String calendarKey;
+
+    @Value("${ak.juHe.simpleWeather}")
+    private String simpleWeatherKey;
 
     @Value("${wechat.register}")
     private String registerWxid;
@@ -69,7 +77,8 @@ public class SendNewsJob extends QuartzJobBean {
             // 1-万年历
             StringBuilder wannianliMessage = new StringBuilder();
             wannianliMessage.append("\n👉[發]今日万年历[發]👈\n");
-            Response<JSONObject> wanninaliRes = juHeRemoteApi.calendar(year.concat("-").concat(month).concat("-").concat(day), "bcb62817550085fa5413e9d451357dc1");
+            Response<JSONObject> wanninaliRes =
+                juHeRemoteApi.calendar(year.concat("-").concat(month).concat("-").concat(day), calendarKey);
             LinkedHashMap result = wanninaliRes.body().getObject("result", LinkedHashMap.class);
             LinkedHashMap data = (LinkedHashMap)result.get("data");
             String animalsYear = String.valueOf(data.get("animalsYear"));
@@ -83,7 +92,8 @@ public class SendNewsJob extends QuartzJobBean {
 
 
             // 2-历史上的今天
-            Response<JSONObject> historyRes = juHeRemoteApi.todayOnhistory(month.concat("/").concat(day), "c2a38597ac388d097d6169cb993840c6");
+            Response<JSONObject> historyRes = juHeRemoteApi.todayOnhistory(month.concat("/").concat(day),
+                todayOnhistoryKey);
             ArrayList historyResult = historyRes.body().getObject("result", ArrayList.class);
             StringBuilder historyMessage = new StringBuilder();
             if (historyResult.size() > 0) {
@@ -159,7 +169,7 @@ public class SendNewsJob extends QuartzJobBean {
         if (null != existMsg) {
             atmosphereMessage.append(existMsg);
         } else {
-            Response<JSONObject> atmosphereRes = juHeWeatherRemoteApi.fapig(null, city, null, "ce7d82fdf33bce897a1660c356d6525e");
+            Response<JSONObject> atmosphereRes = juHeWeatherRemoteApi.fapig(null, city, null, fapigKey);
             if (null != atmosphereRes.body().get("result")) {
                 atmosphereMessage.append("\n👉[炸弹]气象预警[炸弹]👈\n");
                 ArrayList atmosphereResult = atmosphereRes.body().getObject("result", ArrayList.class);
@@ -177,7 +187,7 @@ public class SendNewsJob extends QuartzJobBean {
         if (null != existMsg) {
             weatherMessage.append(existMsg);
         } else {
-            Response<JSONObject> atmosphereRes = juHeWeatherRemoteApi.simpleWeather(city, "184932e83a64734580a0dc4d82ed2875");
+            Response<JSONObject> atmosphereRes = juHeWeatherRemoteApi.simpleWeather(city, simpleWeatherKey);
             if (null != atmosphereRes.body().get("result")) {
                 weatherMessage.append("👉[太阳]【天气预报】[太阳]👈\n");
                 LinkedHashMap atmosphereResult = atmosphereRes.body().getObject("result", LinkedHashMap.class);

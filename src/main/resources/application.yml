@@ -1,16 +1,48 @@
 server:
   port: 10001
+  shutdown: graceful
+  tomcat:
+    #最大连接数
+    max-connections: 1000
+    #最大等待数
+    accept-count: 500
+
+logging:
+  level:
+    com:
+      zhoushengen:
+        robot: DEBUG
 
 wechat:
-  register: wxid_bunp0hfj6n1p22
-  registerName: 明哥的小跟班
-  ourChatId: 19456686024@chatroom
-  gaoChangWxid: wxid_z247kp2sykwb12
+  register: xxx
+  ourChatId: xxx
+  girlFriendWxid: xxx
+  masterWxid: xxx
+  chunkSize: 600
+  function:
+    loginConfirm: false
+
+jenkins:
+  token: 1109c24d77d5c8034be4d44c07b3ec62dd
+
+milvus:
+  host: 127.0.0.1
+  port: 19530
+  collection: xxx
+  outputField: xxx
 
 openAI:
-  auth-token: Bearer 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
+  auth-token: Bearer sk-xxx
   ## 访问超时时间 单位：秒
-  request-timeout: 30
+  request-timeout: 60
+
+ak:
+  baidu: xxx
+  juHe:
+    fapig: xxx
+    todayOnhistory: xxx
+    calendar: xxx
+    simpleWeather: xxx
 
 proxy:
   confirm: true
@@ -25,13 +57,20 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 20MB
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-active: 20
   datasource:
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://120.26.44.124:3306/wechat?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/wechat?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: mypassword
+    password: 123456
     filters: stat
     maxActive: 20
     initialSize: 1
